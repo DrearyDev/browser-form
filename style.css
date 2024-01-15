@@ -35,6 +35,7 @@ dialog {
 }
 dialog h1 {
     margin-bottom: 20px;
+    user-select: none;
 }
 dialog::backdrop {
     background-color: rgba(0,0,0,0.2);
@@ -52,21 +53,39 @@ dialog form ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 dialog form ul li {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 10px;
+    position: relative;
+}
+dialog form ul li:not(:last-child) {
+    margin-bottom: 20px;
+}
+dialog form ul li label {
+    user-select: none;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.group {
+    padding: 20px;
+    border: 1px solid black;
+}
+.option {
     padding: 5px;
+    width: 500px;
+    border: 1px solid black;
+}
+.option:valid {
+    border-color: green;
+}
+.option:invalid {
+    border-color: red;
 }
 .msg {
     font-size: 0.8rem;
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    color: darkred;
 }
