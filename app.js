@@ -64,6 +64,45 @@ function checkZIP() {
 };
 
 
+function checkPassword() {
+    let valid = true;
+    let minLength = pWord.minLength;
+    let passFields = [pWord, pConfirm];
+
+    passFields.forEach(field => {
+        if (field.validity.valueMissing) {
+            valid = false;
+        } else if (field.validity.tooShort) {
+            valid = false;
+            field.setCustomValidity(`Passwords Must Be At Least ${minLength} Characters`);
+        };
+    });
+
+    if (pWord.value !== pConfirm.value) {
+        valid = false;
+        pWord.setCustomValidity('Passwords Must Match');
+        pConfirm.setCustomValidity('Passwords Must Match');
+    };
+
+    if (valid) {
+        pWord.style.borderColor = 'green';
+        pWord.setCustomValidity('');
+        pWord.nextElementSibling.innerText = pWord.validationMessage;
+
+        pConfirm.style.borderColor = 'green';
+        pConfirm.setCustomValidity('');
+        pConfirm.nextElementSibling.innerText = pConfirm.validationMessage;
+    } else {
+        pWord.style.borderColor = 'red';
+        pWord.nextElementSibling.innerText = pWord.validationMessage;
+
+        pConfirm.style.borderColor = 'red';
+        pConfirm.nextElementSibling.innerText = pConfirm.validationMessage;
+    };
+
+    return valid;
+};
+
 
 function validate() {
     let valid = true;
@@ -98,10 +137,6 @@ inputs.forEach(input => { input.addEventListener('input', validate) });
 
 
 submitBtn.addEventListener('click', (e) => {
-
-    if (!validate()) {
-        e.preventDefault();
-    };
-
+    if (!validate()) { e.preventDefault() };
 });
 
