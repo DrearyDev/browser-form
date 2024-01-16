@@ -74,12 +74,12 @@ dialog form ul li label {
     width: 500px;
     border: 1px solid black;
 }
-.option:valid {
+/* .option:valid {
     border-color: green;
 }
 .option:invalid {
     border-color: red;
-}
+} */
 .msg {
     font-size: 0.8rem;
 
