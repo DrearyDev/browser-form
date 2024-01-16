@@ -20,6 +20,32 @@ showBtn.addEventListener('click', () => {
 });
 
 
+function checkNames(e) {
+    if (e.target.validity.valueMissing) {
+        e.target.setCustomValidity('Please fill out this field.');
+        e.target.style.borderColor = 'red';
+    } else {
+        e.target.setCustomValidity('');
+        e.target.style.borderColor = 'green';
+    };
+
+    e.target.nextElementSibling.innerText = e.target.validationMessage;
+};
+
+
+function checkEmail(e) {
+    if (e.target.validity.patternMismatch) {
+        e.target.setCustomValidity("Please enter a valid email.")
+        e.target.style.borderColor = 'red';
+    } else {
+        e.target.setCustomValidity('');
+        e.target.style.borderColor = 'green';
+    };
+
+    e.target.nextElementSibling.innerText = e.target.validationMessage;
+};
+
+
 function checkZIP() {
     const constraints = {
         Switzerland: [
@@ -131,9 +157,19 @@ function validate() {
 
     return valid;
 };
-inputs.forEach(input => { input.addEventListener('input', validate) });
 
 
+
+fNameInput.addEventListener('input', checkNames);
+lNameInput.addEventListener('input', checkNames);
+
+emailInput.addEventListener('input', checkEmail);
+
+pWord.addEventListener('input', checkPassword);
+pConfirm.addEventListener('input', checkPassword);
+
+countryInput.addEventListener('input', checkZIP);
+zCodeInput.addEventListener('input', checkZIP);
 
 
 submitBtn.addEventListener('click', (e) => {
